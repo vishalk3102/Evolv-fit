@@ -1,11 +1,7 @@
 import React from "react";
 import logo from "../assets/resume-img.jpeg";
 import "../Components/Dashboard.css";
-import {
-  CircularProgressbar,
-  CircularProgressbarWithChildren,
-  buildStyles,
-} from "react-circular-progressbar";
+import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import {
   AiOutlinePlus,
@@ -132,7 +128,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className=" col-lg-12 mx-auto">
-              {userData.map((curElems) => {
+              {userData.map((curElems, key) => {
                 const {
                   id,
                   name,
@@ -156,16 +152,18 @@ const Dashboard = () => {
                 } = curElems;
 
                 {
-                  /* const current = new Date(); */
+                  /* Getting  current Date  */
                 }
-                {
-                  /* const date = `${current.getDate}/${current.getMonth}`; */
-                }
-                const date = "25 / 07";
+                const current = new Date();
+                let month = current.toLocaleString("default", {
+                  month: "short",
+                });
+                let day = current.getDate();
+                const date = `${day} ${month}`;
 
                 return (
                   <>
-                    <div className="col-lg-12">
+                    <div key={id} className="col-lg-12">
                       <div className="row-div row">
                         <div className="name-box d-flex justify-content-start align-items-center col-lg-3 col-md-12 col-sm-12">
                           <div className="img-div">
