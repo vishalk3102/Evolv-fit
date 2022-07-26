@@ -11,5 +11,3 @@
 ### Routing to nutrition and workout page,
 ### piechart tooltip,
 
-##  I have Hosted it over heroku,here is the link .
-# https://evolv-fit-vk31.herokuapp.com/
