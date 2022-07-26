@@ -22,7 +22,7 @@ const data = [
   {
     id: 2,
     name: "Charvie Sharma",
-    email: "charviesharma.cs@gmail.com",
+    email: "charviesharma@gmail.com",
     stepWalked: 2547,
     stepTarget: 4000,
     performedDate: "15 oct",
@@ -40,7 +40,7 @@ const data = [
   {
     id: 3,
     name: "Charvie Sharma",
-    email: "charviesharma.cs@gmail.com",
+    email: "charviesharma@gmail.com",
     stepWalked: 2547,
     stepTarget: 4000,
     performedDate: "15 oct",

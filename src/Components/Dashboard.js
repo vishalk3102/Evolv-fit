@@ -107,8 +107,8 @@ const Dashboard = () => {
           <div className="row main-container">
             <div className="col-lg-12 mx-auto">
               <div className="row row-header">
-                <div className="col-lg-4"></div>
-                <div className="col-lg-2">
+                <div className="col-lg-3 "></div>
+                <div className="col-lg-2 ">
                   <span className="icons-div">
                     <FaWalking />
                   </span>
@@ -120,7 +120,7 @@ const Dashboard = () => {
                   </span>
                   <h2>Workout</h2>
                 </div>
-                <div className="col-lg-2">
+                <div className="col-lg-3">
                   <span className="icons-div">
                     <MdOutlineFastfood />
                   </span>
@@ -159,116 +159,122 @@ const Dashboard = () => {
                 const date = "25 / 07";
                 return (
                   <>
-                    <div className="row-div row">
-                      <div className="name-box d-flex justify-content-start align-items-center col-lg-4">
-                        <div className="img-div">
-                          <img src={logo} alt="" />
-                        </div>
-                        <div className="text-div">
-                          <h4>{name}</h4>
-                          <p>{email}</p>
-                        </div>
-                      </div>
-                      <div className="steps-box d-flex justify-content-space-between align-items-center col-lg-2">
-                        <div
-                          styles={{
-                            width: 200,
-                            height: 200,
-                          }}
-                          className="progressbar"
-                        >
-                          <CircularProgressbarWithChildren
-                            value={66}
-                            text={"2547"}
-                          ></CircularProgressbarWithChildren>
-                        </div>
-                        <div className="target-box ms-3">
-                          <div className="plus-minus " onClick={incSteps}>
-                            <AiOutlinePlus />
+                    <div className="col-lg-12">
+                      <div className="row-div row">
+                        <div className="name-box d-flex justify-content-start align-items-center col-lg-3 col-md-12 col-sm-12">
+                          <div className="img-div">
+                            <img src={logo} alt="" />
                           </div>
-                          <h4>{steps}k</h4>
-                          <span>target</span>
-                          <div className="plus-minus" onClick={decSteps}>
-                            <AiOutlineMinus />
+                          <div className="text-div">
+                            <h4>{name}</h4>
+                            <p>{email}</p>
                           </div>
                         </div>
-                      </div>
-                      <div className="workout-box d-flex justify-content-between align-items-center col-lg-2">
-                        <div className="calender">
-                          <div>
-                            <MdOutlinePersonOutline />
-                            <span> {performedDate}</span>
+                        <div className="steps-box d-flex justify-content-space-between align-items-center col-lg-2 col-md-6 col-sm-6">
+                          <div
+                            styles={{
+                              width: 200,
+                              height: 200,
+                            }}
+                            className="progressbar"
+                          >
+                            <CircularProgressbarWithChildren
+                              value={66}
+                              text={"2547"}
+                            ></CircularProgressbarWithChildren>
+                          </div>
+                          <div className="target-box ms-3">
+                            <div className="plus-minus " onClick={incSteps}>
+                              <AiOutlinePlus />
+                            </div>
+                            <h4>{steps}k</h4>
+                            <span>target</span>
+                            <div className="plus-minus" onClick={decSteps}>
+                              <AiOutlineMinus />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="workout-box d-flex justify-content-between align-items-center col-lg-2 col-md-6 col-sm-6">
+                          <div className="calender">
+                            <div>
+                              <MdOutlinePersonOutline />
+                              <span> {performedDate}</span>
+                            </div>
+                            <div
+                              className={
+                                date === scheduleDate ? "red" : "notred"
+                              }
+                            >
+                              <MdOutlineCalendarToday />
+                              <span> {scheduleDate}</span>
+                            </div>
                           </div>
                           <div
-                            className={date === scheduleDate ? "red" : "notred"}
+                            className={
+                              feedback === "true"
+                                ? "redArrow me-4"
+                                : "arrow me-4"
+                            }
+                            onClick={routeChangeWorkout}
                           >
-                            <MdOutlineCalendarToday />
-                            <span> {scheduleDate}</span>
+                            {feedback === "true" ? (
+                              <AiOutlineExclamation />
+                            ) : (
+                              <IoIosArrowForward />
+                            )}
                           </div>
                         </div>
-                        <div
-                          className={
-                            feedback === "true" ? "redArrow me-4" : "arrow me-4"
-                          }
-                          onClick={routeChangeWorkout}
-                        >
-                          {feedback === "true" ? (
-                            <AiOutlineExclamation />
-                          ) : (
+                        <div className="nutrition-box d-flex justify-content-start align-items-center col-lg-3 col-md-5 col-sm-5">
+                          <div className="pie-chart">
+                            <Doughnut
+                              data={{
+                                labels: [],
+                                datasets: [
+                                  {
+                                    label: "nutrition stats",
+                                    data: [
+                                      `${fatConsumed}`,
+                                      `${carbConsumed}`,
+                                      `${proteinConsumed}`,
+                                    ],
+                                    backgroundColor: [
+                                      "#03C7FC",
+                                      "#F45C84",
+                                      "#F5C90F",
+                                    ],
+                                    cutout: 22,
+                                    borderWidth: 0,
+                                  },
+                                ],
+                              }}
+                              plugins={plugins}
+                              height={70}
+                              width={70}
+                            />
+                          </div>
+                          <div className="target-box">
+                            <div className="plus-minus" onClick={incCal}>
+                              <AiOutlinePlus />
+                            </div>
+                            <h4>{cal}k</h4>
+                            <span>target</span>
+                            <div className="plus-minus" onClick={decCal}>
+                              <AiOutlineMinus />
+                            </div>
+                          </div>
+                          <div
+                            className="arrow ms-3"
+                            onClick={routeChangeNutrition}
+                          >
                             <IoIosArrowForward />
-                          )}
-                        </div>
-                      </div>
-                      <div className="nutrition-box d-flex justify-content-start align-items-center col-lg-3">
-                        <div className="pie-chart">
-                          <Doughnut
-                            data={{
-                              labels: [],
-                              datasets: [
-                                {
-                                  label: "nutrition stats",
-                                  data: [
-                                    `${fatConsumed}`,
-                                    `${carbConsumed}`,
-                                    `${proteinConsumed}`,
-                                  ],
-                                  backgroundColor: [
-                                    "#03C7FC",
-                                    "#F45C84",
-                                    "#F5C90F",
-                                  ],
-                                  cutout: 22,
-                                  borderWidth: 0,
-                                },
-                              ],
-                            }}
-                            plugins={plugins}
-                            height={70}
-                            width={70}
-                          />
-                        </div>
-                        <div className="target-box">
-                          <div className="plus-minus" onClick={incCal}>
-                            <AiOutlinePlus />
-                          </div>
-                          <h4>{cal}k</h4>
-                          <span>target</span>
-                          <div className="plus-minus" onClick={decCal}>
-                            <AiOutlineMinus />
                           </div>
                         </div>
-                        <div
-                          className="arrow ms-3"
-                          onClick={routeChangeNutrition}
-                        >
-                          <IoIosArrowForward />
-                        </div>
-                      </div>
-                      <div className="notification-box col-lg-1">
-                        <div>
-                          <span>
-                            <IoNotificationsOutline color="black" />
-                          </span>
+                        <div className="notification-box col-lg-1  col-md-5 col-sm-5">
+                          <div>
+                            <span>
+                              <IoNotificationsOutline color="black" />
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
