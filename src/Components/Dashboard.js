@@ -27,6 +27,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import data from "../Api/data";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import ReactTooltip from "react-tooltip";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -126,7 +128,7 @@ const Dashboard = () => {
                   </span>
                   <h2>Nutrition</h2>
                 </div>
-                <div className="col-lg-2"></div>
+                <div className="col-lg-1"></div>
               </div>
             </div>
             <div className=" col-lg-12 mx-auto">
@@ -148,6 +150,9 @@ const Dashboard = () => {
                   fatConsumed,
                   fatTarget,
                   feedback,
+                  proteinName,
+                  carbsName,
+                  fatName,
                 } = curElems;
 
                 {
@@ -157,6 +162,7 @@ const Dashboard = () => {
                   /* const date = `${current.getDate}/${current.getMonth}`; */
                 }
                 const date = "25 / 07";
+
                 return (
                   <>
                     <div className="col-lg-12">
@@ -180,7 +186,7 @@ const Dashboard = () => {
                           >
                             <CircularProgressbarWithChildren
                               value={66}
-                              text={"2547"}
+                              text={calorieIntake}
                             ></CircularProgressbarWithChildren>
                           </div>
                           <div className="target-box ms-3">
@@ -213,7 +219,7 @@ const Dashboard = () => {
                             className={
                               feedback === "true"
                                 ? "redArrow me-4"
-                                : "arrow me-4"
+                                : "arrow me-4 "
                             }
                             onClick={routeChangeWorkout}
                           >
@@ -225,7 +231,11 @@ const Dashboard = () => {
                           </div>
                         </div>
                         <div className="nutrition-box d-flex justify-content-start align-items-center col-lg-3 col-md-5 col-sm-5">
-                          <div className="pie-chart">
+                          <div
+                            className="pie-chart"
+                            data-tip
+                            data-for="piechart-tooltip"
+                          >
                             <Doughnut
                               data={{
                                 labels: [],
@@ -251,6 +261,66 @@ const Dashboard = () => {
                               height={70}
                               width={70}
                             />
+                            <ReactTooltip
+                              id="piechart-tooltip"
+                              place="bottom"
+                              effect="solid"
+                              event="click"
+                              arrowColor={"#333B44"}
+                              arrowSize={"10px"}
+                            >
+                              <div className="tooltip-row">
+                                <div className="tooltip-text">
+                                  <span>{proteinName}</span>
+                                  <span>{proteinTarget}g</span>
+                                </div>
+                                <div className="tooltip-bar">
+                                  <ProgressBar
+                                    bgColor={"#03C7FC"}
+                                    completed={proteinConsumed}
+                                    customLabel={proteinConsumed}
+                                    height={"15px"}
+                                    labelSize={"12px"}
+                                    baseBgColor={"#101317"}
+                                    maxCompleted={proteinTarget}
+                                  />
+                                </div>
+                              </div>
+                              <div className="tooltip-row">
+                                <div className="tooltip-text">
+                                  <span>{fatName}</span>
+                                  <span>{fatTarget}g</span>
+                                </div>
+                                <div className="tooltip-bar">
+                                  <ProgressBar
+                                    bgColor={"#F45C84"}
+                                    completed={fatConsumed}
+                                    customLabel={fatConsumed}
+                                    height={"15px"}
+                                    labelSize={"12px"}
+                                    baseBgColor={"#101317"}
+                                    maxCompleted={fatTarget}
+                                  />
+                                </div>
+                              </div>
+                              <div className="tooltip-row">
+                                <div className="tooltip-text">
+                                  <span>{carbsName}</span>
+                                  <span>{carbTarget}g</span>
+                                </div>
+                                <div className="tooltip-bar">
+                                  <ProgressBar
+                                    bgColor={"#F5C90F"}
+                                    completed={carbConsumed}
+                                    customLabel={carbConsumed}
+                                    height={"15px"}
+                                    labelSize={"12px"}
+                                    baseBgColor={"#101317"}
+                                    maxCompleted={carbTarget}
+                                  />
+                                </div>
+                              </div>
+                            </ReactTooltip>
                           </div>
                           <div className="target-box">
                             <div className="plus-minus" onClick={incCal}>

@@ -217,7 +217,34 @@ html {
   margin: 0 3rem 1rem 3rem;
   background-color: #1e262f;
 }
-
+#piechart-tooltip {
+  /* border: 2px solid red; */
+  height: 35%;
+  width: 20%;
+  background-color: #333b44;
+  border-radius: 1rem;
+}
+.tooltip-row {
+  /* border: 2px solid red; */
+  margin: 1rem 0rem;
+  background-color: #1b222a;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+}
+.tooltip-text {
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0.5rem 1.2rem;
+}
+.tooltip-bar {
+  /* border: 2px solid red; */
+  font-size: 1rem;
+  margin: 0.5rem 1rem;
+}
 /* ---------- nutrition section ends---------- */
 
 /* ---------- notification section starts---------- */
@@ -603,8 +630,8 @@ html {
     /* border: 2px solid red; */
     height: 6rem !important;
     width: 6rem !important;
-    margin-left: 4rem;
-    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-right: 0.5rem;
   }
 
   .workout-box {
@@ -614,7 +641,7 @@ html {
   }
   .workout-box .calender {
     /* border: 2px solid black; */
-    margin: 0.5rem 0 0.5rem 4rem;
+    margin: 0.5rem 0 0.5rem 2rem;
   }
   .workout-box .calender div {
     /* border: 2px solid blue; */
@@ -640,7 +667,7 @@ html {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin: 0 2rem 1rem 3rem;
+    margin: 0 0.5rem 1rem 0.5rem;
     background-color: #1e262f;
   }
   .notification-box {
@@ -654,16 +681,83 @@ html {
     margin-right: 0rem;
     background-color: #1e262f;
   }
-  .arrow {
+  .arrow,
+  .redArrow {
     /* border: 2px solid black; */
-    background-color: #101317;
+    height: 6rem;
+    width: 3rem;
+    font-size: 1.8rem;
+  }
+  .target-box {
+    /* border: 2px solid red; */
+    margin-right: 1rem;
+    font-size: 1rem;
+  }
+  .target-box h4 {
+    font-size: 1rem;
+  }
+  .target-box span {
+    margin-top: -4px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .name-box {
     height: 7rem;
-    width: 4rem;
-    border-radius: 0.5rem;
-    color: #fff;
+    width: 100%;
+    margin: 1rem 0 1rem 0rem !important;
+    padding: 0 4rem !important;
+  }
+
+  .steps-box {
+    /* border: 2px solid black; */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.8rem;
+    margin: 1rem 0rem;
+  }
+  .CircularProgressbar {
+    /* border: 2px solid red; */
+    height: 6rem !important;
+    width: 6rem !important;
+    margin-left: 1rem;
+    margin-right: 3rem;
+  }
+
+  .workout-box {
+    /* border: 2px solid red; */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .workout-box .calender {
+    /* border: 2px solid black; */
+    margin-left: 8rem;
+  }
+
+  .redArrow {
+    transform: translateX(-7rem);
+  }
+  .nutrition-box {
+    /* border: 2px solid black; */
+    background-color: #1e262f;
+  }
+  .pie-chart {
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.2rem 5rem;
+  }
+  .notification-box {
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .target-box {
+    /* border: 2px solid red; */
+    margin-right: 3rem;
+    font-size: 1rem;
   }
 }
