@@ -1,7 +1,6 @@
 import React from "react";
 import logo from "../assets/resume-img.jpeg";
 import "../Components/Dashboard.css";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import {
   AiOutlinePlus,
@@ -20,7 +19,7 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
-import data from "../Api/data";
+import data from "../Api/data.json";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import ReactTooltip from "react-tooltip";
@@ -68,6 +67,32 @@ const Dashboard = () => {
   const routeChangeNutrition = () => {
     navigate("/userid/nutrition");
   };
+
+  //  progress chart plugins
+  const progressPlugins = [
+    {
+      beforeDraw: function(chart) {
+        var width = chart.width,
+          height = chart.height,
+          ctx = chart.ctx;
+        ctx.restore();
+        var fontSize = (height / 70).toFixed(2);
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "middle";
+        var text = "2547",
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 2;
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+        var text = "Walked",
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 1.5;
+        ctx.fillStyle = "#fff";
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+      },
+    },
+  ];
 
   // doughnut pie chart
   const plugins = [
@@ -175,17 +200,27 @@ const Dashboard = () => {
                           </div>
                         </div>
                         <div className="steps-box d-flex justify-content-space-between align-items-center col-lg-2 col-md-6 col-sm-6">
-                          <div
-                            styles={{
-                              width: 200,
-                              height: 200,
-                            }}
-                            className="progressbar"
-                          >
-                            <CircularProgressbarWithChildren
-                              value={66}
-                              text={calorieIntake}
-                            ></CircularProgressbarWithChildren>
+                          <div className="progressbar ">
+                            <Doughnut
+                              data={{
+                                labels: [],
+                                datasets: [
+                                  {
+                                    label: "steps stats",
+                                    data: [
+                                      `${stepWalked}`,
+                                      `${stepTarget - stepWalked}`,
+                                    ],
+                                    backgroundColor: ["#7FD18C", "#FFFFFF"],
+                                    cutout: 22,
+                                    borderWidth: 0,
+                                  },
+                                ],
+                              }}
+                              plugins={progressPlugins}
+                              height={70}
+                              width={70}
+                            />
                           </div>
                           <div className="target-box ms-3">
                             <div className="plus-minus " onClick={incSteps}>
@@ -228,7 +263,7 @@ const Dashboard = () => {
                             )}
                           </div>
                         </div>
-                        <div className="nutrition-box d-flex justify-content-start align-items-center col-lg-3 col-md-5 col-sm-5">
+                        <div className="nutrition-box  col-lg-3 col-md-5 col-sm-5">
                           <div
                             className="pie-chart"
                             data-tip
@@ -263,7 +298,6 @@ const Dashboard = () => {
                               id="piechart-tooltip"
                               place="bottom"
                               effect="solid"
-                              event="click"
                               arrowColor={"#333B44"}
                               arrowSize={"10px"}
                             >
